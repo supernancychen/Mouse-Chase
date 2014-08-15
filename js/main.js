@@ -93,6 +93,7 @@ function reset (mouseWon) {
       catWidth -= 20;
       catTotal++;
       if(catWidth <= 0) catWidth = 20;
+      
       $('#catScore').append("<img src='img/cat.png' width='20px'/>");
       if(catTotal === endScore)
         $('body').css('background-repeat', 'repeat');
