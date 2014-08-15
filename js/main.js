@@ -1,3 +1,6 @@
+var mouseTotal = 0;
+var catTotal = 0;
+var endScore = 5;
 
 var countDefault = 5;
 var mouseWidth = 30;
@@ -78,16 +81,28 @@ function reset (mouseWon) {
     if(mouseWon) {
       $('body').css('background-image', 'url(img/mouse.png)');
       catWidth += 20;
+      mouseTotal++;
+      $('#mouseScore').append("<img src='img/mouse.png' width='14px' style='padding: 0 3px;'/>");
     }
     else {
       $('body').css('background-image', 'url(img/cat.png)');
       catWidth -= 20;
+      catTotal++;
       if(catWidth <= 0) catWidth = 20;
+      $('#catScore').append("<img src='img/cat.png' width='20px'/>");
     }
     $('#count').hide();
     $('#mouse').width(mouseWidth);
     $('#hand').width(catWidth);
   }
+
+  if(catTotal === endScore || mouseTotal === endScore) {
+    $('body').css('background-repeat', 'repeat');
+  }
+  else {
+    $('body').css('background-repeat', 'no-repeat'); 
+  }
+
 }
 
 reset();
