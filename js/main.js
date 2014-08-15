@@ -83,6 +83,10 @@ function reset (mouseWon) {
       catWidth += 20;
       mouseTotal++;
       $('#mouseScore').append("<img src='img/mouse.png' width='14px' style='padding: 0 3px;'/>");
+      if(mouseTotal === endScore)
+        $('body').css('background-repeat', 'repeat');
+      else
+        $('body').css('background-repeat', 'no-repeat'); 
     }
     else {
       $('body').css('background-image', 'url(img/cat.png)');
@@ -90,19 +94,15 @@ function reset (mouseWon) {
       catTotal++;
       if(catWidth <= 0) catWidth = 20;
       $('#catScore').append("<img src='img/cat.png' width='20px'/>");
+      if(catTotal === endScore)
+        $('body').css('background-repeat', 'repeat');
+      else
+        $('body').css('background-repeat', 'no-repeat'); 
     }
     $('#count').hide();
     $('#mouse').width(mouseWidth);
     $('#hand').width(catWidth);
   }
-
-  if(catTotal === endScore || mouseTotal === endScore) {
-    $('body').css('background-repeat', 'repeat');
-  }
-  else {
-    $('body').css('background-repeat', 'no-repeat'); 
-  }
-
 }
 
 reset();
