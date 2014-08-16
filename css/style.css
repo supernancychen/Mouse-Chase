@@ -1,0 +1,49 @@
+* {
+  cursor: none;
+}
+
+body {
+  color: white;
+  background-color: #0088ce;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 150px;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+#score {
+  float: left;
+  font-size: 14px;
+  text-align: left;
+}
+
+#text {
+  left: 0;
+  line-height: 200px;
+  margin: auto;
+  margin-top: -100px;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+}
+
+#mouse {
+  position: absolute;
+  left: -100px;
+}
+
+#hand {
+  position: absolute; 
+  display: none;
+}
+
+#instruction {
+  font-size: 20px;
+  letter-spacing: 2px;
+  line-height: 50px;
+  color: white;
+}
+
