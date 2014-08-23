@@ -12,6 +12,9 @@ var frame;
 var controller = new Leap.Controller();
 var x;
 var y;
+var resettingGame = false;
+
+var backgroundColors = ['#0088ce', '#5daa00', '#de3950', 'f2c52c'];
 
 var timer = setInterval(function(){
   if(isCounting) {
@@ -30,16 +33,34 @@ $(document).on('mousemove', function(e){
     });
 });
 
+// press spacebar to start a round
 $(document).keyup(function(evt) {
   if (evt.keyCode == 32 && !isCounting) {
     $('body').css('background-image', 'none');
-    isCounting = true;
-    $("#message").html("");
-    $("#count").html(countDefault);
-    $('#count').show();
-    $("#instruction").hide();
+    if(resettingGame) {
+      resettingGame = false;
+      resetGame();
+    }
+    else {
+      isCounting = true;
+      $("#message").html("");
+      $("#count").html(countDefault);
+      $('#count').show();
+      $("#instruction").hide();
+    }
   }
 })
+
+function resetGame() {
+  $('#instruction').css('margin-top','0').show();
+  $('#firstTime').show();
+  mouseTotal = 0;
+  catTotal = 0;
+  catWidth = 80;
+  $('#mouseScore').empty();
+  $('#catScore').empty();
+  $('body').css('background-color', backgroundColors[Math.floor((Math.random() * 4))]);
+}
 
 /*  
   The leapToScene function takes a position in leap space 
@@ -83,8 +104,10 @@ function reset (mouseWon) {
       catWidth += 20;
       mouseTotal++;
       $('#mouseScore').append("<img src='img/mouse.png' width='14px' style='padding: 0 3px;'/>");
-      if(mouseTotal === endScore)
+      if(mouseTotal === endScore) {
         $('body').css('background-repeat', 'repeat');
+        resettingGame = true;        
+      }
       else
         $('body').css('background-repeat', 'no-repeat'); 
     }
@@ -95,12 +118,17 @@ function reset (mouseWon) {
       if(catWidth <= 0) catWidth = 20;
       
       $('#catScore').append("<img src='img/cat.png' width='20px'/>");
-      if(catTotal === endScore)
+      if(catTotal === endScore) {
         $('body').css('background-repeat', 'repeat');
+        resettingGame = true;
+      }
       else
         $('body').css('background-repeat', 'no-repeat'); 
     }
     $('#count').hide();
+    $('#instruction').show();
+    $('#firstTime').hide();
+    $('#instruction').css('margin-top','300px');
     $('#mouse').width(mouseWidth);
     $('#hand').width(catWidth);
   }
